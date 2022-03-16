@@ -1,0 +1,53 @@
+﻿@model CoreWebApp.Model.SalesViewModel.SalesViewModel
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewData["Title"] = "Property";
+}
+<script type="text/javascript">
+    function SelectedIndexChanged() {
+        var url = "/Sales/GetPropertyByCustomerId";
+        $.getJSON(url, { CustomerId: $("#CustomerId").val() }, function (data) {
+            var items = '';
+            $('#ddlProperty').empty();
+            $.each(data, function (i, product) {
+                items += "<option value='" + product.value + "'>" + product.text + "</option>";
+            });
+            $('#ddlProperty').html(items);
+        });
+        document.demoForm.submit();
+    }
+</script>
+
+<h1>Sales</h1>
+
+<h4>Sell property</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("SellProperty", "Sales", FormMethod.Post))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerId)
+                @Html.DropDownListFor(m => m.CustomerId, new SelectList(Model.customerList, "Value", "Text"), "Choose a customer", new { @class = "form-control", onchange = "SelectedIndexChanged()" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PropertyId)
+                @Html.DropDownListFor(m => m.PropertyId, new SelectList(string.Empty, "Id", "PropertyName"), "Choose a property", new { @class = "form-control", id = "ddlProperty" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

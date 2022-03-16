@@ -1,0 +1,52 @@
+﻿@model CoreWebApp.Model.Property.PropertyViewModel
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewData["Title"] = "Property";
+}
+
+<h1>Add property</h1>
+
+<h4>Property</h4>
+<div>@ViewBag.Message</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("AddProperty", "Property", FormMethod.Post))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PropertyName)
+                @Html.TextBoxFor(model => model.PropertyName, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PropertyNo)
+                @Html.TextBoxFor(model => model.PropertyNo, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Street)
+                @Html.TextBoxFor(model => model.Street, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PropertyType)
+                @Html.TextBoxFor(model => model.PropertyType, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerId)
+                @Html.DropDownListFor(m => m.CustomerId, new SelectList(Model.customerList, "Value", "Text"), new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.0" />
+    <PackageReference Include="Realm" Version="10.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoreWebApp.Core\CoreWebApp.Core.csproj" />
+    <ProjectReference Include="..\CoreWebApp.Data\CoreWebApp.Data.csproj" />
+    <ProjectReference Include="..\CoreWebApp.Model\CoreWebApp.Model.csproj" />
+    <ProjectReference Include="..\CoreWebApp.Repository\CoreWebApp.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
